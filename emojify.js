@@ -34,7 +34,7 @@
      /* :-]  */ smirk: /[:;]-?]/g,
      /* :-D  */ smiley: /[:;]-?d/gi,
      /* X-D  */ stuck_out_tongue_closed_eyes: /x-d/gi,
-     /* ;-p  */ stuck_out_tongue_winking_eye: /[:;]-?p/gi,
+     /* ;-p  */ stuck_out_tongue_winking_eye: />?[:;]-?p/gi,
      /* :-[  */ rage: /:-?[\[@]/g,
      /* :-(  */ disappointed: /:-?\(/g,
      /* :'-( */ sob: /:['’]-?\(|:&#x27;\(/g,
@@ -145,14 +145,12 @@
                     /* At the beginning? */
                     if(index === 0) { return success(); }
 
-                    /* At the end? */
-                    if(input.length === m.length + index) { return success(); }
 
-                    var hasEmojiBefore = this.lastEmojiTerminatedAt === index;
-                    if (hasEmojiBefore) { return success();}
+                    var hasEmojiBefore = index !== 0 && this.lastEmojiTerminatedAt === index;
+                    if (hasEmojiBefore) { return success(); }
 
                     /* Has a whitespace before? */
-                    if(isWhitespace(input.charAt(index - 1))) { return success(); }
+                    if(index === 0 || isWhitespace(input.charAt(index - 1))) { return success(); }
 
                     var hasWhitespaceAfter = isWhitespace(input.charAt(m.length + index));
                     /* Has a whitespace after? */

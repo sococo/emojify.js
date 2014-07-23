@@ -32,12 +32,12 @@ JS.Test.describe('emojify used with flat strings', function() {
             this.assertEqual(text, result);
         });
 
-        this.it('does not insert emoji at the end of a word, unless it is at the end', function () {
+        this.it('does not insert emoji at the end of a word', function () {
             var text = "hey:)";
             var result = emojify.replace(text);
-            this.assert(text !== result);
+            this.assertEqual(text, result);
 
-            text = "hey:) there";
+            text = "I;d";
             result = emojify.replace(text);
             this.assertEqual(text, result);
         });
